@@ -4,7 +4,7 @@ from users.models import Cohort, IMUser
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length = 1000) # creates the table that we want to register
-    descritpion = models.TextField(default = 'n/a', blank = True, null = True), # It just 
+    description = models.TextField(default = 'n/a', blank = True, null = True), # It just 
     date_created = models.DateTimeField(auto_now_add = True, blank = True, null = True) # Anytime anything is inserted, update the date
     date_modified = models.DateTimeField(auto_now = True, blank = True, null = True) # The moment something is added include the current date
 
