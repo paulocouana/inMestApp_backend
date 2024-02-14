@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 # from django.contrib.auth.models import User  # For Django's default auth system
 
 # Create your models here.
@@ -8,11 +9,13 @@ class UserType(models.TextChoices):
     TEACHING_FELLOW = 'TEACHING_FELLOW'
     ADMIN_STAFF = 'ADMIN_STAFF'
     ADMIN = 'ADMIN'
+    SUPER_USER = 'SUPER_USER'
 
-class IMUser(models.Model):
+class IMUser(AbstractUser):
     first_name = models.CharField(max_length=255)
+    middle_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     user_type = models.CharField(max_length=20, choices=UserType.choices)
     date_created = models.DateTimeField(auto_now_add=True)
     email = models.EmailField(unique=True)  # Essential for communication
@@ -20,7 +23,8 @@ class IMUser(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)  # Optional demographic information
     address = models.TextField(blank=True)  # Optional for physical location
 
-    def __str__(self):
+    # Defines the toString that overights the behavior of the method toString. In this case after creating a user, when pressing Enter the first and last names will be show on the screen
+    def __str__(self): 
         return f"{self.first_name} {self.last_name}"
 
 
