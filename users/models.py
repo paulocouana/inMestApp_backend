@@ -39,19 +39,22 @@ class Cohort(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('IMUser', on_delete=models.CASCADE, related_name='cohort_author')  # Reference the IMUser model
 
+    # Defines the toString that overights the behavior of the method toString. In this case after creating a user, when pressing Enter the first and last names will be show on the screen
     def __str__(self):
         return f"{self.name} ({self.year})"
 
 
 class CohortMember(models.Model):
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE)
-    member = models.ForeignKey('IMUser', on_delete=models.CASCADE)  # Reference the IMUser model
+    member = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='cohort_memberships') # Reference the IMUser model
+    # member = models.ForeignKey('IMUser', on_delete=models.CASCADE)  # Reference the IMUser model
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     author = models.ForeignKey('IMUser', on_delete=models.CASCADE)  # Reference the IMUser model
-    member = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='cohort_memberships')
-    author = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='created_cohort_memberships')  # Reference the IMUser model
+    # author = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='created_cohort_memberships')  # Reference the IMUser model
+
+    # Defines the toString that overights the behavior of the method toString. In this case after creating a user, when pressing Enter the first and last names will be show on the screen
 
     def __str__(self):
         return f"{self.member.first_name} {self.member.last_name} - {self.cohort.name}"
