@@ -20,5 +20,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main.urls')) # The empty quote means we should not add anything to be able to access every path in the main
+    path('', include('main.urls')), # The empty quote means we should not add anything to be able to access every path in the main
+    path('api-auth/', include('rest_framework.urls'))
 ]
