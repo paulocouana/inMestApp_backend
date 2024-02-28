@@ -16,6 +16,11 @@ class RepeatFrequency(models.TextChoices):
     MONTHLY = 'MONTHLY'
 
 
+class MeetingTypes(models.TextChoices):
+    CLASS_SESSION = 'Class Sessions'
+    WELLNESS_SESSION = 'Well Session'
+    GUEST_LECTURE = 'Guest Lecture'
+
 class ClassSchedule(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True)
@@ -23,10 +28,16 @@ class ClassSchedule(models.Model):
     end_date_and_time = models.DateTimeField()
     is_repeated = models.BooleanField(default=False)
     repeat_frequency = models.CharField(max_length=10, choices=RepeatFrequency.choices, blank=True, null=True)
+    meeting_type = models.CharField(max_length=20, choices=MeetingTypes.choices, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     organizer = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='organized_schedule')  # Reference the IMUser model
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, blank=True, null=True)  # Optional reference to Cohort
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, blank=True, null= True, related_name='course_schedule')
+    facilitator = models.ForeignKey(IMUser, on_delete=models.CASCADE, blank=True, null= True, related_name='class_facilitator')
     venue = models.CharField(max_length=255, blank=True)
+    date_created = models.DateTimeField(auto_now=True, blank=True, null=True)
+    date_modified = models.DateTimeField(auto_now=True, blank=True, null=True)
+
 
     def __str__(self):
         return f"{self.title} ({self.start_date_and_time} - {self.end_date_and_time})"

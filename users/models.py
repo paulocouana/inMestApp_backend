@@ -37,7 +37,7 @@ class Cohort(models.Model):
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey('IMUser', on_delete=models.CASCADE, related_name='cohort_author')  # Reference the IMUser model
+    author = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='cohort_author')  # Reference the IMUser model
 
     # Defines the toString that overights the behavior of the method toString. In this case after creating a user, when pressing Enter the first and last names will be show on the screen
     def __str__(self):
@@ -51,7 +51,7 @@ class CohortMember(models.Model):
     is_active = models.BooleanField(default=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey('IMUser', on_delete=models.CASCADE)  # Reference the IMUser model
+    author = models.ForeignKey(IMUser, on_delete=models.CASCADE)  # Reference the IMUser model
     # author = models.ForeignKey(IMUser, on_delete=models.CASCADE, related_name='created_cohort_memberships')  # Reference the IMUser model
 
     # Defines the toString that overights the behavior of the method toString. In this case after creating a user, when pressing Enter the first and last names will be show on the screen

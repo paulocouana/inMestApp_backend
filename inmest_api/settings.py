@@ -53,7 +53,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'inmest_api.urls'
-AUTH_USER_MODEL = 'users.IMUser' # This tell Django that I am changing the default class to the users.IMUser model
+
+AUTH_USER_MODEL = 'users.IMUser' # This tells Django that I am changing the default class to the users.IMUser model
 
 TEMPLATES = [
     {
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT'
 
 USE_I18N = True
 
